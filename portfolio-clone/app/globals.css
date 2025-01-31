@@ -1,0 +1,332 @@
+@font-face {
+  font-family: "Aeonik";
+  src: url("/fonts/Aeonik-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("/fonts/Aeonik-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("/fonts/Aeonik-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Studio Feixen Sans";
+  src: url("/fonts/StudioFeixenSans-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Studio Feixen Sans";
+  src: url("/fonts/StudioFeixenSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Studio Feixen Sans";
+  src: url("/fonts/StudioFeixenSans-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+
+  html {
+    font-family: "Studio Feixen Sans", system-ui, sans-serif;
+  }
+
+  /* Add this to ensure all text elements use the font */
+  *,
+  *::before,
+  *::after {
+    font-family: "Studio Feixen Sans", system-ui, sans-serif;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.02em;
+  cursor: default;
+}
+
+.badge-glow {
+  box-shadow: 0 0 0 2px rgba(139, 164, 157, 0.2);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom link underline animation */
+.hover-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.hover-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Circular cursor text */
+.project-cursor {
+  position: relative;
+  cursor: none;
+}
+
+.cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  left: var(--x, -100px);
+  top: var(--y, -100px);
+}
+
+.project-cursor:hover .cursor-ring {
+  opacity: 1;
+}
+
+.cursor-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  animation: rotate 10s linear infinite;
+}
+
+.cursor-letter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: 0 60px;
+  color: #292033;
+  font-size: 14px;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Animation utilities */
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Content sections animation */
+.content-animation > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.content-animation > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.content-animation > *:nth-child(2) {
+  transition-delay: 100ms;
+}
+.content-animation > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+.content-animation > *:nth-child(4) {
+  transition-delay: 300ms;
+}
+.content-animation > *:nth-child(5) {
+  transition-delay: 400ms;
+}
+.content-animation > *:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+/* Enhanced animation classes */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for lists */
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger-animation > *.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-animation > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.stagger-animation > *:nth-child(2) {
+  transition-delay: 100ms;
+}
+.stagger-animation > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+.stagger-animation > *:nth-child(4) {
+  transition-delay: 300ms;
+}
+.stagger-animation > *:nth-child(5) {
+  transition-delay: 400ms;
+}
+.stagger-animation > *:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+/* Scroll ring animation */
+.scroll-ring {
+  position: fixed;
+  bottom: 120px;
+  right: 40px;
+  width: 80px;
+  height: 80px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.scroll-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  animation: rotate 12s linear infinite;
+}
+
+.scroll-letter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: 0 67px;
+  color: #292033;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Custom cursor styles */
+.cursor-hidden {
+  cursor: none;
+}
+
+.scroll-cursor {
+  pointer-events: none;
+  position: absolute;
+  width: 134px;
+  height: 134px;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  left: var(--x, -100px);
+  top: var(--y, -100px);
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  transform-origin: 0 67px;
+}
+
+.scroll-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  animation: rotate 12s linear infinite;
+}
+
+.scroll-letter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: 0 67px;
+  color: #292033;
+  font-size: 14px;
+  font-weight: 400;
+}
+
